@@ -3,32 +3,33 @@ package com.tsi.pedro.Project;
 
 import javax.persistence.*;
 
-
 @Entity
-@Table(name ="actor")
+@Table(name ="customer")
 
-public class Actor {
+public class Customer {
     //Attributes
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int actor_id;
+    int customer_id;
     private String first_name;
     private String last_name;
+    private String email;
 
-    public Actor(String first_name, String last_name){
+    public Customer(String first_name, String last_name, String email){
         this.first_name = first_name;
         this.last_name = last_name;
+        this.email = email;
     }
 
-    public Actor(){
+    public Customer(){
 
     }
-    public int getActor_id() {
-        return actor_id;
+    public int getCustomer_id() {
+        return customer_id;
     }
 
-    public void setActor_id(int actor_id) {
-        this.actor_id = actor_id;
+    public void setCustomer_id(int customer_id) {
+        this.customer_id = customer_id;
     }
 
     public String getFirst_name() {
@@ -47,6 +48,11 @@ public class Actor {
         this.last_name = last_name;
     }
 
+    public String getEmail() {
+        return email;
+    }
 
-
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }
