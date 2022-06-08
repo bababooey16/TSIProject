@@ -19,6 +19,7 @@ public class MicroServiceProjectApplication {
 	@Autowired
 	private AddressRepository addressRepository;
 	private String saved = "Saved";
+	private String deleted = "Deleted";
 
 	public MicroServiceProjectApplication(ActorRepository actorRepository, CustomerRepository customerRepository, AddressRepository addressRepository){
 		this.actorRepository = actorRepository;
@@ -37,15 +38,16 @@ public class MicroServiceProjectApplication {
 	}
 
 	@PostMapping("/Add_Actor")
-		public @ResponseBody String Add_Actor(@RequestParam String first_name, @RequestParam String last_name){
+	public @ResponseBody
+	String Add_Actor(@RequestParam String first_name, @RequestParam String last_name){
 		Actor Add_Actor = new Actor(first_name,last_name);
 		actorRepository.save(Add_Actor);
 		return saved;
 	}
 	@DeleteMapping("/Delete_Actor")
-	public @ResponseBody String Delete_Actor (@RequestParam int actor_id){
+	public @ResponseBody String Delete_Actor(@RequestParam int actor_id){
 		actorRepository.deleteById(actor_id);
-		return saved;
+		return deleted;
 	}
 	@PutMapping("/Update_Actor")
 	public ResponseEntity<Actor> Update_Actor (@RequestParam int actor_id, String first_name, String last_name) throws ResourceDoesNotExistException {
