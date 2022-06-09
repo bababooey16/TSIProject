@@ -1,6 +1,8 @@
 package com.tsi.pedro.Project;
 
 
+import org.apache.maven.wagon.ResourceDoesNotExistException;
+import org.hibernate.sql.Update;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,7 +11,10 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Optional;
+
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class MockitoTest {
@@ -57,6 +62,17 @@ public class MockitoTest {
         Assertions.assertEquals(expected, Actual, "Actor not deleted");
     }
 
+    @Test
+    public void testUpdateActor() throws ResourceDoesNotExistException {
+        Actor UpdateActor = new Actor("testActorFirst", "testActorLast");
+        UpdateActor.setActor_id(1);
+        when(actorRepository.findById(1)).thenReturn(Optional.of(UpdateActor));
+        Actor Actual = microServiceProjectApplication.Update_Actor(UpdateActor.getActor_id(), UpdateActor.getFirst_name(), UpdateActor.getLast_name()).getBody();
+        ArgumentCaptor<Actor> actorArgumentCaptor = ArgumentCaptor.forClass(Actor.class);
+        verify(actorRepository).save(actorArgumentCaptor.capture());
+        Actor Expected = actorArgumentCaptor.getValue();
+        Assertions.assertEquals(Expected,Actual,"Actor was not updated.");
+    }
 
     @Test
     public void getAllCustomers(){
