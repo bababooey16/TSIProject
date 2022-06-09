@@ -45,25 +45,18 @@ public class MockitoTest {
         Assertions.assertEquals(expected,Actual,"Actor is not saved into the database");
 
     }
-    //@Test
-//    public void testDeleteActor(){
-////        Actor SavedActor = new Actor("testActorFirst","testActorLast");
-////        String expected = "Saved";
-////        Mockito.when(actorRepository.findById(SavedActor.getActor_id())).thenReturn(Optional.of(SavedActor));
-////        String Actual = MicroServiceProjectApplication.Delete_Actor(SavedActor.getActor_id());
-////        actorRepository.deleteById(SavedActor.getActor_id());
-//        Actor dummyActor = new Actor("John" , "Doe") ;
-//        dummyActor.setActor_id(1);
-//        microServiceProjectApplication.Add_Actor(dummyActor.getFirst_name(),dummyActor.getLast_name());
-//        ArgumentCaptor<Actor> actorArgumentCaptor = ArgumentCaptor.forClass(Actor.class);
-//        verify(actorRepository).save(actorArgumentCaptor.capture());
-//        Actor Actual = microServiceProjectApplication.Delete_Actor(dummyActor.getActor_id()).getBody();
-//        actorRepository.deleteById(dummyActor.getActor_id());
-//        Actor expected = dummyActor;
-//
-//        Assertions.assertEquals(expected, Actual, "Actor not deleted");
-//
-//    }
+    @Test
+    public void testDeleteActor() {
+        Actor DeletedActor = new Actor("testActorFirst", "testActorLast");
+        DeletedActor.setActor_id(1);
+        String Actual = microServiceProjectApplication.Delete_Actor(1);
+        String expected = "Deleted";
+        ArgumentCaptor<Integer> actorArgumentCaptor = ArgumentCaptor.forClass(Integer.class);
+        verify(actorRepository).deleteById(actorArgumentCaptor.capture());
+        actorArgumentCaptor.getValue();
+        Assertions.assertEquals(expected, Actual, "Actor not deleted");
+    }
+
 
     @Test
     public void getAllCustomers(){
