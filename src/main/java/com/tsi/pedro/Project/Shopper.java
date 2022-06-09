@@ -5,30 +5,30 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name ="actor")
+@Table(name ="shopper")
 
-public class Actor {
+public class Shopper {
     //Attributes
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int actor_id;
+    private int shopper_id;
     private String first_name;
     private String last_name;
 
-    public Actor(String first_name, String last_name){
+    public Shopper(String first_name, String last_name){
         this.first_name = first_name;
         this.last_name = last_name;
     }
 
-    public Actor(){
+    public Shopper(){
 
     }
-    public int getActor_id() {
-        return actor_id;
+    public int getShopper_id() {
+        return shopper_id;
     }
 
-    public void setActor_id(int actor_id) {
-        this.actor_id = actor_id;
+    public void setShopper_id(int shopper_id) {
+        this.shopper_id = shopper_id;
     }
 
     public String getFirst_name() {

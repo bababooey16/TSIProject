@@ -1,8 +1,6 @@
 package com.tsi.pedro.Project;
 
 
-import org.apache.maven.wagon.ResourceDoesNotExistException;
-import org.hibernate.sql.Update;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,55 +21,55 @@ public class MockitoTest {
     @Mock
     private CustomerRepository customerRepository;
     @Mock
-    private ActorRepository actorRepository;
+    private ShopperRepository shopperRepository;
     @Mock
     private AddressRepository addressRepository;
 
-    int actor_id;
+    int shopper_id;
     @BeforeEach
     void setUp(){
-        microServiceProjectApplication = new MicroServiceProjectApplication(actorRepository, customerRepository, addressRepository);
+        microServiceProjectApplication = new MicroServiceProjectApplication(shopperRepository, customerRepository, addressRepository);
     }
 
     @Test
-    public void getAllActors(){
-        microServiceProjectApplication.getAllActors();
-        verify(actorRepository).findAll();
+    public void getAllShoppers(){
+        microServiceProjectApplication.getAllShoppers();
+        verify(shopperRepository).findAll();
     }
 
     @Test
-    public void testAddActor(){
-        Actor SavedActor = new Actor("testActorFirst","testActorLast");
+    public void testAddShopper(){
+        Shopper savedShopper = new Shopper("testShopperFirst","testShopperLast");
         String expected = "Saved";
-        String Actual = microServiceProjectApplication.Add_Actor(SavedActor.getFirst_name(),SavedActor.getLast_name());
-        ArgumentCaptor<Actor> actorArgumentCaptor = ArgumentCaptor.forClass(Actor.class);
-        verify(actorRepository).save(actorArgumentCaptor.capture());
-        actorArgumentCaptor.getValue();
-        Assertions.assertEquals(expected,Actual,"Actor is not saved into the database");
+        String Actual = microServiceProjectApplication.Add_Shopper(savedShopper.getFirst_name(), savedShopper.getLast_name());
+        ArgumentCaptor<Shopper> shopperArgumentCaptor = ArgumentCaptor.forClass(Shopper.class);
+        verify(shopperRepository).save(shopperArgumentCaptor.capture());
+        shopperArgumentCaptor.getValue();
+        Assertions.assertEquals(expected,Actual,"Shopper is not saved into the database");
 
     }
     @Test
-    public void testDeleteActor() {
-        Actor DeletedActor = new Actor("testActorFirst", "testActorLast");
-        DeletedActor.setActor_id(1);
-        String Actual = microServiceProjectApplication.Delete_Actor(1);
+    public void testDeleteShopper() {
+        Shopper deletedShopper = new Shopper("testShopperFirst", "testShopperLast");
+        deletedShopper.setShopper_id(1);
+        String Actual = microServiceProjectApplication.Delete_Shopper(1);
         String expected = "Deleted";
-        ArgumentCaptor<Integer> actorArgumentCaptor = ArgumentCaptor.forClass(Integer.class);
-        verify(actorRepository).deleteById(actorArgumentCaptor.capture());
-        actorArgumentCaptor.getValue();
-        Assertions.assertEquals(expected, Actual, "Actor not deleted");
+        ArgumentCaptor<Integer> shopperArgumentCaptor = ArgumentCaptor.forClass(Integer.class);
+        verify(shopperRepository).deleteById(shopperArgumentCaptor.capture());
+        shopperArgumentCaptor.getValue();
+        Assertions.assertEquals(expected, Actual, "Shopper not deleted");
     }
 
     @Test
-    public void testUpdateActor() {
-        Actor UpdateActor = new Actor("testActorFirst", "testActorLast");
-        UpdateActor.setActor_id(1);
-        when(actorRepository.findById(1)).thenReturn(Optional.of(UpdateActor));
-        Actor Actual = microServiceProjectApplication.Update_Actor(UpdateActor.getActor_id(), UpdateActor.getFirst_name(), UpdateActor.getLast_name()).getBody();
-        ArgumentCaptor<Actor> actorArgumentCaptor = ArgumentCaptor.forClass(Actor.class);
-        verify(actorRepository).save(actorArgumentCaptor.capture());
-        Actor Expected = actorArgumentCaptor.getValue();
-        Assertions.assertEquals(Expected,Actual,"Actor was not updated.");
+    public void testUpdateShopper() {
+        Shopper updateShopper = new Shopper("testShopperFirst", "testShopperLast");
+        updateShopper.setShopper_id(1);
+        when(shopperRepository.findById(1)).thenReturn(Optional.of(updateShopper));
+        Shopper Actual = microServiceProjectApplication.Update_Shopper(updateShopper.getShopper_id(), updateShopper.getFirst_name(), updateShopper.getLast_name()).getBody();
+        ArgumentCaptor<Shopper> shopperArgumentCaptor = ArgumentCaptor.forClass(Shopper.class);
+        verify(shopperRepository).save(shopperArgumentCaptor.capture());
+        Shopper Expected = shopperArgumentCaptor.getValue();
+        Assertions.assertEquals(Expected,Actual,"Shopper was not updated.");
     }
 
     @Test

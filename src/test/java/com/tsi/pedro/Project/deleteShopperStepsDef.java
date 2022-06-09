@@ -12,46 +12,46 @@ import org.mockito.Mock;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-public class deleteActorStepsDef {
+public class deleteShopperStepsDef {
 
-    Actor DeletedActor;
+    Shopper deletedShopper;
     private MicroServiceProjectApplication microServiceProjectApplication;
 
     @Mock
     private CustomerRepository customerRepository;
     @Mock
-    private ActorRepository actorRepository;
+    private ShopperRepository shopperRepository;
     @Mock
     private AddressRepository addressRepository;
 
     @BeforeEach
     void setUp(){
-        actorRepository=mock(ActorRepository.class);
+        shopperRepository =mock(ShopperRepository.class);
         customerRepository=mock(CustomerRepository.class);
         addressRepository=mock(AddressRepository.class);
-        microServiceProjectApplication = new MicroServiceProjectApplication(actorRepository, customerRepository, addressRepository);
+        microServiceProjectApplication = new MicroServiceProjectApplication(shopperRepository, customerRepository, addressRepository);
     }
 
-    @Given("I have the actor information for deletion")
-    public void i_have_the_actor_information_for_deletion() {
+    @Given("I have the shopper information for deletion")
+    public void i_have_the_shopper_information_for_deletion() {
 
-        DeletedActor = new Actor("testActorFirst","testActorLast");
-        DeletedActor.setActor_id(1);
+        deletedShopper = new Shopper("testShopperFirst","testShopperLast");
+        deletedShopper.setShopper_id(1);
     }
 
     String Actual;
     @When("I send the delete request")
     public void i_send_the_delete_request() {
         setUp();
-        Actual = microServiceProjectApplication.Delete_Actor(1);
+        Actual = microServiceProjectApplication.Delete_Shopper(1);
 
     }
     @Then("I get the deleted return string")
     public void i_get_the_deleted_return_string(){
         String expected = "Deleted";
-        ArgumentCaptor<Integer>actorArgumentCaptor = ArgumentCaptor.forClass(Integer.class);
-        verify(actorRepository).deleteById(actorArgumentCaptor.capture());
-        actorArgumentCaptor.getValue();
+        ArgumentCaptor<Integer>shopperArgumentCaptor = ArgumentCaptor.forClass(Integer.class);
+        verify(shopperRepository).deleteById(shopperArgumentCaptor.capture());
+        shopperArgumentCaptor.getValue();
 
         Assertions.assertEquals(expected, Actual);
 

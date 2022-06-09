@@ -1,8 +1,8 @@
 package com.tsi.pedro.Project;
 
 
-import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class MicroServiceProjectApplication {
 
 	@Autowired
-	private ActorRepository actorRepository;
+	private ShopperRepository shopperRepository;
 	@Autowired
 	private CustomerRepository customerRepository;
 	@Autowired
@@ -22,8 +22,8 @@ public class MicroServiceProjectApplication {
 	private String saved = "Saved";
 	private String deleted = "Deleted";
 
-	public MicroServiceProjectApplication(ActorRepository actorRepository, CustomerRepository customerRepository, AddressRepository addressRepository){
-		this.actorRepository = actorRepository;
+	public MicroServiceProjectApplication(ShopperRepository shopperRepository, CustomerRepository customerRepository, AddressRepository addressRepository){
+		this.shopperRepository = shopperRepository;
 		this.customerRepository = customerRepository;
 		this.addressRepository= addressRepository;
 	}
@@ -32,31 +32,31 @@ public class MicroServiceProjectApplication {
 		SpringApplication.run(MicroServiceProjectApplication.class, args);
 	}
 
-	@GetMapping("/All_Actors")
+	@GetMapping("/All_Shoppers")
 	public @ResponseBody
-	Iterable<Actor>getAllActors(){
-		return actorRepository.findAll();
+	Iterable<Shopper>getAllShoppers(){
+		return shopperRepository.findAll();
 	}
 
-	@PostMapping("/Add_Actor")
+	@PostMapping("/Add_Shopper")
 	public @ResponseBody
-	String Add_Actor(@RequestParam String first_name, @RequestParam String last_name){
-		Actor Add_Actor = new Actor(first_name,last_name);
-		actorRepository.save(Add_Actor);
+	String Add_Shopper(@RequestParam String first_name, @RequestParam String last_name){
+		Shopper add_Shopper = new Shopper(first_name,last_name);
+		shopperRepository.save(add_Shopper);
 		return saved;
 	}
-	@DeleteMapping("/Delete_Actor")
-	public @ResponseBody String Delete_Actor(@RequestParam int actor_id){
-		actorRepository.deleteById(actor_id);
+	@DeleteMapping("/Delete_Shopper")
+	public @ResponseBody String Delete_Shopper(@RequestParam int shopper_id){
+		shopperRepository.deleteById(shopper_id);
 		return deleted;
 	}
-	@PutMapping("/Update_Actor")
-	public ResponseEntity<Actor> Update_Actor (@RequestParam int actor_id, String first_name, String last_name) {
-		Actor Update_Actor = actorRepository.findById(actor_id).orElseThrow(() -> new ResourceNotFoundException("Employee not found for " + actor_id));
-		Update_Actor.setFirst_name(first_name);
-		Update_Actor.setLast_name(last_name);
-		actorRepository.save(Update_Actor);
-		return ResponseEntity.ok(Update_Actor);
+	@PutMapping("/Update_Shopper")
+	public ResponseEntity<Shopper> Update_Shopper (@RequestParam int shopper_id, String first_name, String last_name) {
+		Shopper update_Shopper = shopperRepository.findById(shopper_id).orElseThrow(() -> new ResourceNotFoundException("Employee not found for " + shopper_id));
+		update_Shopper.setFirst_name(first_name);
+		update_Shopper.setLast_name(last_name);
+		shopperRepository.save(update_Shopper);
+		return ResponseEntity.ok(update_Shopper);
 	}
 
 

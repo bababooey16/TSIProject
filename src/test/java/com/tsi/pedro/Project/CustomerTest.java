@@ -3,7 +3,7 @@ package com.tsi.pedro.Project;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class CustomerTests {
+public class CustomerTest {
 
     @Test
     public void testGetCustomer_id(){

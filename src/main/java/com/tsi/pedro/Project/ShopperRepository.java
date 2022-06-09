@@ -2,7 +2,7 @@ package com.tsi.pedro.Project;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface ActorRepository extends CrudRepository<Actor,Integer> {
+public interface ShopperRepository extends CrudRepository<Shopper,Integer> {
 
 
 

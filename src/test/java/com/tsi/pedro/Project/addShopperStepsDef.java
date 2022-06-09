@@ -1,6 +1,5 @@
 package com.tsi.pedro.Project;
 
-import com.tsi.pedro.Project.*;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -15,29 +14,29 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
-public class addActorStepsDef {
-    Actor SavedActor;
+public class addShopperStepsDef {
+    Shopper savedShopper;
     private MicroServiceProjectApplication microServiceProjectApplication;
 
     @Mock
     private CustomerRepository customerRepository;
     @Mock
-    private ActorRepository actorRepository;
+    private ShopperRepository shopperRepository;
     @Mock
     private AddressRepository addressRepository;
 
     @BeforeEach
     void setUp(){
-        actorRepository=mock(ActorRepository.class);
+        shopperRepository =mock(ShopperRepository.class);
         customerRepository=mock(CustomerRepository.class);
         addressRepository=mock(AddressRepository.class);
-        microServiceProjectApplication = new MicroServiceProjectApplication(actorRepository, customerRepository, addressRepository);
+        microServiceProjectApplication = new MicroServiceProjectApplication(shopperRepository, customerRepository, addressRepository);
     }
 
-    @Given("I have the actor information")
-    public void i_have_the_actor_information() {
+    @Given("I have the shopper information")
+    public void i_have_the_shopper_information() {
 
-        SavedActor = new Actor("testActorFirst","testActorLast");
+        savedShopper = new Shopper("testShopperFirst","testShopperLast");
 
 
     }
@@ -45,7 +44,7 @@ public class addActorStepsDef {
     @When("I input the data into the database")
     public void i_input_the_data_into_the_database() {
         setUp();
-        Actual = microServiceProjectApplication.Add_Actor(SavedActor.getFirst_name(), SavedActor.getLast_name());
+        Actual = microServiceProjectApplication.Add_Shopper(savedShopper.getFirst_name(), savedShopper.getLast_name());
     }
 
 
@@ -54,10 +53,10 @@ public class addActorStepsDef {
         // check for return
 
         String expected = "Saved";
-        ArgumentCaptor<Actor> actorArgumentCaptor = ArgumentCaptor.forClass(Actor.class);
-        verify(actorRepository).save(actorArgumentCaptor.capture());
-        actorArgumentCaptor.getValue();
-        Assertions.assertEquals(expected, Actual, "Actor not added");
+        ArgumentCaptor<Shopper> shopperArgumentCaptor = ArgumentCaptor.forClass(Shopper.class);
+        verify(shopperRepository).save(shopperArgumentCaptor.capture());
+        shopperArgumentCaptor.getValue();
+        Assertions.assertEquals(expected, Actual, "Shopper not added");
 
     }
 
