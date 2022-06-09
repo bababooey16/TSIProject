@@ -5,39 +5,39 @@ import org.junit.jupiter.api.Test;
 
 public class AddressTest {
     @Test
-    public void testGetActor_id(){
-        Actor testActor = new Actor("testAddress", "testDistrict");
-        testActor.setActor_id(1);
-        Assertions.assertEquals(1, testActor.getActor_id(), "id not found.");
+    public void testGetAddress_id(){
+        Address testAddress = new Address("testAddress", "testDistrict");
+        testAddress.setAddress_id(1);
+        Assertions.assertEquals(1, testAddress.getAddress_id(), "id not found.");
     }
     @Test
-    public void testSetActor_id(){
-        Actor testActor = new Actor("testAddress", "testDistrict");
-        testActor.setActor_id(1);
-        Assertions.assertEquals(1, testActor.getActor_id(), "id not set.");
+    public void testSetAddress_id(){
+        Address testAddress = new Address("testAddress", "testDistrict");
+        testAddress.setAddress_id(1);
+        Assertions.assertEquals(1, testAddress.getAddress_id(), "id not set.");
     }
     @Test
-    public void testGetFirst_name(){
-        Actor testActor = new Actor("testAddress", "testDistrict");
-        Assertions.assertEquals("testAddress", testActor.getFirst_name(), "address not found.");
+    public void testGetAddress(){
+        Address testAddress = new Address("testAddress", "testDistrict");
+        Assertions.assertEquals("testAddress", testAddress.getAddress(), "address not found.");
     }
     @Test
-    public void testSetFirst_name(){
-        Actor testActor = new Actor("testAddress", "testDistrict");
-        testActor.setFirst_name("replacedFName");
-        Assertions.assertEquals("replacedFName", testActor.getFirst_name(), "address not set.");
+    public void testSetAddress(){
+        Address testAddress = new Address("testAddress", "testDistrict");
+        testAddress.setAddress("replacedAddress");
+        Assertions.assertEquals("replacedAddress", testAddress.getAddress(), "address not set.");
     }
     @Test
-    public void testGetLast_name(){
-        Actor testActor = new Actor("testAddress", "testDistrict");
-        testActor.getLast_name();
-        Assertions.assertEquals("testDistrictame", testActor.getLast_name(), "district not found.");
+    public void testGetDistrict(){
+        Address testAddress = new Address("testAddress", "testDistrict");
+        testAddress.getDistrict();
+        Assertions.assertEquals("testDistrict", testAddress.getDistrict(), "district not found.");
     }
     @Test
-    public void testSetLast_name(){
-        Actor testActor = new Actor("testAddress", "testDistrict");
-        testActor.setLast_name("replacedLName");
-        Assertions.assertEquals("replacedLName", testActor.getLast_name(), "district not set.");
+    public void testSetDistrict(){
+        Address testAddress = new Address("testAddress", "testDistrict");
+        testAddress.setDistrict("replacedDistrict");
+        Assertions.assertEquals("replacedDistrict", testAddress.getDistrict(), "district not set.");
     }
 
 }
