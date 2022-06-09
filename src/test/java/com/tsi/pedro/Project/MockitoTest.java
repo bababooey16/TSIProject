@@ -63,7 +63,7 @@ public class MockitoTest {
     }
 
     @Test
-    public void testUpdateActor() throws ResourceDoesNotExistException {
+    public void testUpdateActor() {
         Actor UpdateActor = new Actor("testActorFirst", "testActorLast");
         UpdateActor.setActor_id(1);
         when(actorRepository.findById(1)).thenReturn(Optional.of(UpdateActor));

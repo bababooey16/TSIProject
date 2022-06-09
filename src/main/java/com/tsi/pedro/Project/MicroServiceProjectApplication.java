@@ -1,6 +1,7 @@
 package com.tsi.pedro.Project;
 
-import org.apache.maven.wagon.ResourceDoesNotExistException;
+
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -50,8 +51,8 @@ public class MicroServiceProjectApplication {
 		return deleted;
 	}
 	@PutMapping("/Update_Actor")
-	public ResponseEntity<Actor> Update_Actor (@RequestParam int actor_id, String first_name, String last_name) throws ResourceDoesNotExistException {
-		Actor Update_Actor = actorRepository.findById(actor_id).orElseThrow(() -> new ResourceDoesNotExistException("Employee not found for " + actor_id));
+	public ResponseEntity<Actor> Update_Actor (@RequestParam int actor_id, String first_name, String last_name) {
+		Actor Update_Actor = actorRepository.findById(actor_id).orElseThrow(() -> new ResourceNotFoundException("Employee not found for " + actor_id));
 		Update_Actor.setFirst_name(first_name);
 		Update_Actor.setLast_name(last_name);
 		actorRepository.save(Update_Actor);
