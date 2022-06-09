@@ -40,8 +40,8 @@ public class MicroServiceProjectApplication {
 
 	@PostMapping("/Add_Shopper")
 	public @ResponseBody
-	String Add_Shopper(@RequestParam String first_name, @RequestParam String last_name){
-		Shopper add_Shopper = new Shopper(first_name,last_name);
+	String Add_Shopper(@RequestParam String first_name, @RequestParam String last_name, @RequestParam long credit_card, @RequestParam int customer_id){
+		Shopper add_Shopper = new Shopper(first_name,last_name, credit_card, customer_id);
 		shopperRepository.save(add_Shopper);
 		return saved;
 	}
@@ -51,10 +51,12 @@ public class MicroServiceProjectApplication {
 		return deleted;
 	}
 	@PutMapping("/Update_Shopper")
-	public ResponseEntity<Shopper> Update_Shopper (@RequestParam int shopper_id, String first_name, String last_name) {
+	public ResponseEntity<Shopper> Update_Shopper (@RequestParam int shopper_id, String first_name, String last_name, long credit_card, int customer_id) {
 		Shopper update_Shopper = shopperRepository.findById(shopper_id).orElseThrow(() -> new ResourceNotFoundException("Employee not found for " + shopper_id));
 		update_Shopper.setFirst_name(first_name);
 		update_Shopper.setLast_name(last_name);
+		update_Shopper.setCredit_card(credit_card);
+		update_Shopper.setCustomer_id(customer_id);
 		shopperRepository.save(update_Shopper);
 		return ResponseEntity.ok(update_Shopper);
 	}

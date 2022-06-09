@@ -35,7 +35,7 @@ public class deleteShopperStepsDef {
     @Given("I have the shopper information for deletion")
     public void i_have_the_shopper_information_for_deletion() {
 
-        deletedShopper = new Shopper("testShopperFirst","testShopperLast");
+        deletedShopper = new Shopper("testShopperFirst","testShopperLast",123,69);
         deletedShopper.setShopper_id(1);
     }
 

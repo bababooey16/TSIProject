@@ -36,7 +36,7 @@ public class addShopperStepsDef {
     @Given("I have the shopper information")
     public void i_have_the_shopper_information() {
 
-        savedShopper = new Shopper("testShopperFirst","testShopperLast");
+        savedShopper = new Shopper("testShopperFirst","testShopperLast",16543654323L,69);
 
 
     }
@@ -44,7 +44,7 @@ public class addShopperStepsDef {
     @When("I input the data into the database")
     public void i_input_the_data_into_the_database() {
         setUp();
-        Actual = microServiceProjectApplication.Add_Shopper(savedShopper.getFirst_name(), savedShopper.getLast_name());
+        Actual = microServiceProjectApplication.Add_Shopper(savedShopper.getFirst_name(), savedShopper.getLast_name(), savedShopper.getCredit_card(), savedShopper.getCustomer_id());
     }
 
 

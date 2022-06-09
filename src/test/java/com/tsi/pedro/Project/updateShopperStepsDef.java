@@ -35,7 +35,7 @@ public class updateShopperStepsDef {
     @Given("I have the shopper information to update")
     public void i_have_the_shopper_information_to_update() {
 
-        updatedShopper = new Shopper("testShopperFirst","testShopperLast");
+        updatedShopper = new Shopper("testShopperFirst","testShopperLast",123,69);
         updatedShopper.setShopper_id(1);
     }
     Shopper Actual;
@@ -46,7 +46,9 @@ public class updateShopperStepsDef {
         when(shopperRepository.findById(1)).thenReturn(Optional.of(updatedShopper));
         String firstName = "updatedName";
         String lastName = "updatedLName";
-        Actual = microServiceProjectApplication.Update_Shopper(updatedShopper.getShopper_id(), firstName, lastName).getBody();
+        int creditcard = 12345;
+        int customerid = 6969;
+        Actual = microServiceProjectApplication.Update_Shopper(updatedShopper.getShopper_id(), firstName, lastName, creditcard, customerid).getBody();
 
     }
     @Then("I get the updated return string")
