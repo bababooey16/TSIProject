@@ -66,12 +66,7 @@ public class MicroServiceProjectApplication {
 		return customerRepository.findAll();
 	}
 
-//	@PostMapping("/Add_Customer")
-//	public @ResponseBody String Add_Customer(@RequestParam String first_name, @RequestParam String last_name, String email){
-//		Customer Add_Customer = new Customer(first_name,last_name,email);
-//		customerRepository.save(Add_Customer);
-//		return saved;
-//	}
+
 
 	@GetMapping("/All_Addresses")
 	public @ResponseBody

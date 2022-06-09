@@ -1,22 +1,20 @@
 package com.tsi.pedro.Project;
 
-import com.tsi.pedro.Project.*;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import java.util.Optional;
 
-@ExtendWith(MockitoExtension.class)
-public class addActorStepsDef {
-    Actor SavedActor;
+import static org.mockito.Mockito.*;
+
+public class updateActorStepsDef {
+
+    Actor UpdatedActor;
     private MicroServiceProjectApplication microServiceProjectApplication;
 
     @Mock
@@ -34,35 +32,31 @@ public class addActorStepsDef {
         microServiceProjectApplication = new MicroServiceProjectApplication(actorRepository, customerRepository, addressRepository);
     }
 
-    @Given("I have the actor information")
-    public void i_have_the_actor_information() {
+    @Given("I have the actor information to update")
+    public void i_have_the_actor_information_to_update() {
 
-        SavedActor = new Actor("testActorFirst","testActorLast");
-
-
+        UpdatedActor = new Actor("testActorFirst","testActorLast");
+        UpdatedActor.setActor_id(1);
     }
-    String Actual;
-    @When("I input the data into the database")
-    public void i_input_the_data_into_the_database() {
+    Actor Actual;
+    Actor expected;
+    @When("I send the update request")
+    public void i_send_the_update_request() {
         setUp();
-        Actual = microServiceProjectApplication.Add_Actor(SavedActor.getFirst_name(), SavedActor.getLast_name());
+        when(actorRepository.findById(1)).thenReturn(Optional.of(UpdatedActor));
+        String firstName = "updatedName";
+        String lastName = "updatedLName";
+        Actual = microServiceProjectApplication.Update_Actor(UpdatedActor.getActor_id(), firstName, lastName).getBody();
+
     }
+    @Then("I get the updated return string")
+    public void i_get_the_updated_return_string() {
 
-
-    @Then("I get the success return string")
-    public void i_get_the_success_return_string() {
-        // check for return
-
-        String expected = "Saved";
         ArgumentCaptor<Actor> actorArgumentCaptor = ArgumentCaptor.forClass(Actor.class);
         verify(actorRepository).save(actorArgumentCaptor.capture());
-        actorArgumentCaptor.getValue();
-        Assertions.assertEquals(expected, Actual, "Actor not added");
-
+        expected = actorArgumentCaptor.getValue();
+        Assertions.assertEquals(expected, Actual, "Actor not updated");
     }
-
-
-
 
 
 
