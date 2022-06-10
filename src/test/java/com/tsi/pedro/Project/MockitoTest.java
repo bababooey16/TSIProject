@@ -38,10 +38,20 @@ public class MockitoTest {
     }
 
     @Test
+    public void testGetAShopper(){
+        Shopper testShopper = new Shopper ("testnameF", "TestnameL", 87643548756487L, 1);
+        testShopper.setShopper_id(1);
+        when(shopperRepository.findById(1)).thenReturn(Optional.of(testShopper));
+        Shopper Actual = microServiceProjectApplication.getAShopper(testShopper.getShopper_id()).getBody();
+        Shopper expected = testShopper;
+        Assertions.assertEquals(expected, Actual, "Could not find Shopper with ID");
+    }
+
+    @Test
     public void testAddShopper(){
         Shopper savedShopper = new Shopper("testShopperFirst","testShopperLast", 6467435834587L,69);
         String expected = "Saved";
-        String Actual = microServiceProjectApplication.Add_Shopper(savedShopper.getFirst_name(), savedShopper.getLast_name(), savedShopper.getCredit_card(), savedShopper.getCustomer_id());
+        String Actual = microServiceProjectApplication.Add_Shopper(savedShopper.getFirst_name(), savedShopper.getLast_name(), savedShopper.getCredit_card(), savedShopper.getShopper_id());
         ArgumentCaptor<Shopper> shopperArgumentCaptor = ArgumentCaptor.forClass(Shopper.class);
         verify(shopperRepository).save(shopperArgumentCaptor.capture());
         shopperArgumentCaptor.getValue();
@@ -77,6 +87,16 @@ public class MockitoTest {
         microServiceProjectApplication.getAllCustomers();
         verify(customerRepository).findAll();
     }
+    @Test
+    public void testGetACustomer(){
+        Customer testCustomer = new Customer ("testnameF", "TestnameL", "Exampleemail@pingpong.com");
+        testCustomer.setCustomer_id(1);
+        when(customerRepository.findById(1)).thenReturn(Optional.of(testCustomer));
+        Customer Actual = microServiceProjectApplication.getACustomer(testCustomer.getCustomer_id()).getBody();
+        Customer expected = testCustomer;
+        Assertions.assertEquals(expected, Actual, "Could not find Customer with ID");
+    }
+
 
 
     @Test
@@ -86,6 +106,15 @@ public class MockitoTest {
     }
 
 
+    @Test
+    public void testGetAnAddress(){
+        Address testAddress = new Address ("testaddress", "testdistrict");
+        testAddress.setAddress_id(1);
+        when(addressRepository.findById(1)).thenReturn(Optional.of(testAddress));
+        Address Actual = microServiceProjectApplication.getAnAddress(testAddress.getAddress_id()).getBody();
+        Address expected = testAddress;
+        Assertions.assertEquals(expected, Actual, "Could not find Address ID");
+    }
 
 
 

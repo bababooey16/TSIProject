@@ -37,6 +37,12 @@ public class MicroServiceProjectApplication {
 	Iterable<Shopper>getAllShoppers(){
 		return shopperRepository.findAll();
 	}
+	@GetMapping("/Get_A_Shopper")
+	public ResponseEntity<Shopper>getAShopper(@RequestParam int shopper_id){
+		Shopper shopper = shopperRepository.findById(shopper_id).orElseThrow(() -> new ResourceNotFoundException("Shopper does not exist with ID: " +shopper_id));
+		return ResponseEntity.ok(shopper);
+	}
+
 
 	@PostMapping("/Add_Shopper")
 	public @ResponseBody
@@ -68,7 +74,11 @@ public class MicroServiceProjectApplication {
 		return customerRepository.findAll();
 	}
 
-
+	@GetMapping("/Get_A_Customer")
+	public ResponseEntity<Customer>getACustomer(@RequestParam int customer_id){
+		Customer customer = customerRepository.findById(customer_id).orElseThrow(() -> new ResourceNotFoundException("Shopper does not exist with ID: " +customer_id));
+		return ResponseEntity.ok(customer);
+	}
 
 	@GetMapping("/All_Addresses")
 	public @ResponseBody
@@ -76,6 +86,11 @@ public class MicroServiceProjectApplication {
 		return addressRepository.findAll();
 	}
 
+	@GetMapping("/Get_An_Address")
+	public ResponseEntity<Address>getAnAddress(@RequestParam int address_id){
+		Address address = addressRepository.findById(address_id).orElseThrow(() -> new ResourceNotFoundException("Shopper does not exist with ID: " +address_id));
+		return ResponseEntity.ok(address);
+	}
 
 
 
