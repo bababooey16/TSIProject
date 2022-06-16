@@ -22,7 +22,7 @@ public class seleniumTest {
     }
     @Test
     public void chromeSessionTest() {
-        System.setProperty("webdriver.chrome.driver","C:\\program files\\chromedriver\\chromedriver.exe");
+        WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         driver = new ChromeDriver(options);
 
@@ -32,7 +32,7 @@ public class seleniumTest {
     //test for connecting to localsite, and interacting with tictactoe web app
     @Test
     public void webSiteConnectionTest(){
-        System.setProperty("webdriver.chrome.driver","C:\\program files\\chromedriver\\chromedriver.exe");
+        WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.get("http://localhost:8000/");
         String title = driver.getTitle();
