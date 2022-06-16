@@ -1,4 +1,4 @@
-package com.tsi.pedro.Project;
+package com.tsi.pedro.Project.Selenium;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.Test;

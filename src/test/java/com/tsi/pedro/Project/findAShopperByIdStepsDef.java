@@ -36,7 +36,7 @@ public class findAShopperByIdStepsDef {
     @Given("I have the shopper id number")
     public void i_have_the_shopper_id_number() {
 
-        findShopper = new Shopper("firstname", "lastname", 3724657634243L, 17);
+        findShopper = new Shopper("firstname",  3724657634243L,"05/05",306, 17);
         findShopper.setShopper_id(1);
     }
     @When("I input the id into the search")

@@ -13,16 +13,20 @@ public class Shopper {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int shopper_id;
     private String first_name;
-    private String last_name;
+
     private long credit_card;
+    private String expire_date;
+    private int cvc_code;
     private int customer_id;
 
 
 
-    public Shopper(String first_name, String last_name, long credit_card, int customer_id){
+    public Shopper(String first_name,  long credit_card, String expire_date, int cvc_code, int customer_id){
         this.first_name = first_name;
-        this.last_name = last_name;
+
         this.credit_card = credit_card;
+        this.expire_date = expire_date;
+        this.cvc_code = cvc_code;
         this.customer_id = customer_id;
     }
 
@@ -45,13 +49,6 @@ public class Shopper {
         this.first_name = first_name;
     }
 
-    public String getLast_name() {
-        return last_name;
-    }
-
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
-    }
 
     public long getCredit_card() {
         return credit_card;
@@ -59,6 +56,22 @@ public class Shopper {
 
     public void setCredit_card(long credit_card) {
         this.credit_card = credit_card;
+    }
+
+    public String getExpire_date() {
+        return expire_date;
+    }
+
+    public void setExpire_date(String expire_date) {
+        this.expire_date = expire_date;
+    }
+
+    public int getCvc_code() {
+        return cvc_code;
+    }
+
+    public void setCvc_code(int cvc_code) {
+        this.cvc_code = cvc_code;
     }
 
     public int getCustomer_id() {

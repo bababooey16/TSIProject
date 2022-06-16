@@ -40,7 +40,7 @@ public class MockitoTest {
 
     @Test
     public void testGetAShopper(){
-        Shopper testShopper = new Shopper ("testnameF", "TestnameL", 87643548756487L, 1);
+        Shopper testShopper = new Shopper ("testnameF", 87643548756487L,"06/09",408, 1);
         testShopper.setShopper_id(1);
         when(shopperRepository.findById(1)).thenReturn(Optional.of(testShopper));
         Shopper Actual = microServiceProjectApplication.getAShopper(testShopper.getShopper_id()).getBody();
@@ -50,9 +50,9 @@ public class MockitoTest {
 
     @Test
     public void testAddShopper(){
-        Shopper savedShopper = new Shopper("testShopperFirst","testShopperLast", 6467435834587L,69);
+        Shopper savedShopper = new Shopper("testShopperFirst",6467435834587L,"10/09",309,69);
         String expected = "Saved";
-        String Actual = microServiceProjectApplication.Add_Shopper(savedShopper.getFirst_name(), savedShopper.getLast_name(), savedShopper.getCredit_card(), savedShopper.getShopper_id());
+        String Actual = microServiceProjectApplication.Add_Shopper(savedShopper.getFirst_name(),  savedShopper.getCredit_card(), savedShopper.getExpire_date(), savedShopper.getCvc_code(), savedShopper.getShopper_id());
         ArgumentCaptor<Shopper> shopperArgumentCaptor = ArgumentCaptor.forClass(Shopper.class);
         verify(shopperRepository).save(shopperArgumentCaptor.capture());
         shopperArgumentCaptor.getValue();
@@ -61,7 +61,7 @@ public class MockitoTest {
     }
     @Test
     public void testDeleteShopper() {
-        Shopper deletedShopper = new Shopper("testShopperFirst", "testShopperLast",213675476547654L,69);
+        Shopper deletedShopper = new Shopper("testShopperFirst",213675476547654L,"15/09",308,69);
         deletedShopper.setShopper_id(1);
         System.out.println(shopperRepository.findAll());
 
@@ -75,10 +75,10 @@ public class MockitoTest {
 
     @Test
     public void testUpdateShopper() {
-        Shopper updateShopper = new Shopper("testShopperFirst", "testShopperLast",1276547654765443L,69);
+        Shopper updateShopper = new Shopper("testShopperFirst", 1276547654765443L,"15/10",382, 69);
         updateShopper.setShopper_id(1);
         when(shopperRepository.findById(1)).thenReturn(Optional.of(updateShopper));
-        Shopper Actual = microServiceProjectApplication.Update_Shopper(updateShopper.getShopper_id(), updateShopper.getFirst_name(), updateShopper.getLast_name(), updateShopper.getCredit_card(), updateShopper.getCustomer_id()).getBody();
+        Shopper Actual = microServiceProjectApplication.Update_Shopper(updateShopper.getShopper_id(), updateShopper.getFirst_name(),  updateShopper.getCredit_card(), updateShopper.getExpire_date(), updateShopper.getCvc_code(), updateShopper.getCustomer_id()).getBody();
         ArgumentCaptor<Shopper> shopperArgumentCaptor = ArgumentCaptor.forClass(Shopper.class);
         verify(shopperRepository).save(shopperArgumentCaptor.capture());
         Shopper Expected = shopperArgumentCaptor.getValue();
