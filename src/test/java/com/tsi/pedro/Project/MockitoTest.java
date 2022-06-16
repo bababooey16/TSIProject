@@ -7,12 +7,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-
+import static org.mockito.Mockito.when;
 import java.util.Optional;
 
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class MockitoTest {
@@ -33,6 +33,7 @@ public class MockitoTest {
 
     @Test
     public void getAllShoppers(){
+
         microServiceProjectApplication.getAllShoppers();
         verify(shopperRepository).findAll();
     }
@@ -62,6 +63,8 @@ public class MockitoTest {
     public void testDeleteShopper() {
         Shopper deletedShopper = new Shopper("testShopperFirst", "testShopperLast",213675476547654L,69);
         deletedShopper.setShopper_id(1);
+        System.out.println(shopperRepository.findAll());
+
         String Actual = microServiceProjectApplication.Delete_Shopper(1);
         String expected = "Deleted";
         ArgumentCaptor<Integer> shopperArgumentCaptor = ArgumentCaptor.forClass(Integer.class);
