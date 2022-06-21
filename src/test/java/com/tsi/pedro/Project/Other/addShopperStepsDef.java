@@ -1,5 +1,6 @@
-package com.tsi.pedro.Project;
+package com.tsi.pedro.Project.Other;
 
+import com.tsi.pedro.Project.*;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -36,7 +37,7 @@ public class addShopperStepsDef {
     @Given("I have the shopper information")
     public void i_have_the_shopper_information() {
 
-        savedShopper = new Shopper("testShopperFirst",16543654323L,"03/03",803,69);
+        savedShopper = new Shopper("testShopperFirst",16543654323L,"03/03",803,null);
 
 
     }
@@ -44,7 +45,7 @@ public class addShopperStepsDef {
     @When("I input the data into the database")
     public void i_input_the_data_into_the_database() {
         setUp();
-        Actual = microServiceProjectApplication.Add_Shopper(savedShopper.getFirst_name(), savedShopper.getCredit_card(), savedShopper.getExpire_date(), savedShopper.getCvc_code(), savedShopper.getCustomer_id());
+        Actual = microServiceProjectApplication.Add_Shopper(savedShopper);
     }
 
 

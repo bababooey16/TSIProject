@@ -1,5 +1,6 @@
-package com.tsi.pedro.Project;
+package com.tsi.pedro.Project.Other;
 
+import com.tsi.pedro.Project.*;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;

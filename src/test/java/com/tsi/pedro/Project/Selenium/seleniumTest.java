@@ -34,15 +34,19 @@ public class seleniumTest {
     public void webSiteConnectionTest(){
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
-        driver.get("http://localhost:8000/");
+        driver.get("http://localhost:8000/index.html");
         String title = driver.getTitle();
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
-        WebElement squarebutton = driver.findElement(By.className("square"));
-        squarebutton.click();
-        WebElement squarebutton3 = driver.findElement(By.xpath("(//*[@class='square'])[3]"));
-        squarebutton3.click();
-        WebElement historybutton = driver.findElement(By.xpath("(//*[@id='historybutton'])[2]"));
-        historybutton.click();
+        WebElement navitem = driver.findElement(By.xpath("(//*[@class='nav-link'])[2]"));
+        navitem.click();
+
+
+//        WebElement squarebutton = driver.findElement(By.className("square"));
+//        squarebutton.click();
+//        WebElement squarebutton3 = driver.findElement(By.xpath("(//*[@class='square'])[3]"));
+//        squarebutton3.click();
+//        WebElement historybutton = driver.findElement(By.xpath("(//*[@id='historybutton'])[2]"));
+//        historybutton.click();
     }
 
 

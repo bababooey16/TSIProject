@@ -13,15 +13,15 @@ public class Shopper {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int shopper_id;
     private String first_name;
-
     private long credit_card;
     private String expire_date;
     private int cvc_code;
-    private int customer_id;
+    private Integer customer_id;
 
 
 
-    public Shopper(String first_name,  long credit_card, String expire_date, int cvc_code, int customer_id){
+
+    public Shopper(String first_name,  long credit_card, String expire_date, int cvc_code, Integer customer_id){
         this.first_name = first_name;
 
         this.credit_card = credit_card;
@@ -78,7 +78,7 @@ public class Shopper {
         return customer_id;
     }
 
-    public void setCustomer_id(int customer_id) {
+    public void setCustomer_id(Integer customer_id) {
         this.customer_id = customer_id;
     }
 }

@@ -1,5 +1,6 @@
-package com.tsi.pedro.Project;
+package com.tsi.pedro.Project.Other;
 
+import com.tsi.pedro.Project.Shopper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

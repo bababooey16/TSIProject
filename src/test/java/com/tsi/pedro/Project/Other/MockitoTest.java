@@ -1,6 +1,7 @@
-package com.tsi.pedro.Project;
+package com.tsi.pedro.Project.Other;
 
 
+import com.tsi.pedro.Project.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -52,7 +53,7 @@ public class MockitoTest {
     public void testAddShopper(){
         Shopper savedShopper = new Shopper("testShopperFirst",6467435834587L,"10/09",309,69);
         String expected = "Saved";
-        String Actual = microServiceProjectApplication.Add_Shopper(savedShopper.getFirst_name(),  savedShopper.getCredit_card(), savedShopper.getExpire_date(), savedShopper.getCvc_code(), savedShopper.getShopper_id());
+        String Actual = microServiceProjectApplication.Add_Shopper(savedShopper);
         ArgumentCaptor<Shopper> shopperArgumentCaptor = ArgumentCaptor.forClass(Shopper.class);
         verify(shopperRepository).save(shopperArgumentCaptor.capture());
         shopperArgumentCaptor.getValue();
@@ -61,7 +62,7 @@ public class MockitoTest {
     }
     @Test
     public void testDeleteShopper() {
-        Shopper deletedShopper = new Shopper("testShopperFirst",213675476547654L,"15/09",308,69);
+        Shopper deletedShopper = new Shopper("testShopperFirst",213675476547654L,"15/09",308,30);
         deletedShopper.setShopper_id(1);
         System.out.println(shopperRepository.findAll());
 
@@ -75,7 +76,7 @@ public class MockitoTest {
 
     @Test
     public void testUpdateShopper() {
-        Shopper updateShopper = new Shopper("testShopperFirst", 1276547654765443L,"15/10",382, 69);
+        Shopper updateShopper = new Shopper("testShopperFirst", 1276547654765443L,"15/10",382, 30);
         updateShopper.setShopper_id(1);
         when(shopperRepository.findById(1)).thenReturn(Optional.of(updateShopper));
         Shopper Actual = microServiceProjectApplication.Update_Shopper(updateShopper.getShopper_id(), updateShopper.getFirst_name(),  updateShopper.getCredit_card(), updateShopper.getExpire_date(), updateShopper.getCvc_code(), updateShopper.getCustomer_id()).getBody();

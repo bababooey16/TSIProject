@@ -6,12 +6,18 @@ import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.*;
+
+import java.security.SecureRandom;
 
 @SpringBootApplication
 @RestController
 @RequestMapping("/home")
+@CrossOrigin
 public class MicroServiceProjectApplication {
+
+
 
 	@Autowired
 	private ShopperRepository shopperRepository;
@@ -21,6 +27,7 @@ public class MicroServiceProjectApplication {
 	private AddressRepository addressRepository;
 	private String saved = "Saved";
 	private String deleted = "Deleted";
+	private int randomCustomer;
 
 	public MicroServiceProjectApplication(ShopperRepository shopperRepository, CustomerRepository customerRepository, AddressRepository addressRepository){
 		this.shopperRepository = shopperRepository;
@@ -45,10 +52,12 @@ public class MicroServiceProjectApplication {
 
 
 	@PostMapping("/Add_Shopper")
-	public @ResponseBody
-	String Add_Shopper(@RequestParam String first_name, @RequestParam long credit_card, @RequestParam String expire_date, @RequestParam int cvc_code, int customer_id){
-		Shopper add_Shopper = new Shopper(first_name, credit_card, expire_date, cvc_code, customer_id);
-		shopperRepository.save(add_Shopper);
+	public @ResponseBody String Add_Shopper(@RequestBody Shopper shopper){
+		SecureRandom randCustomer = new SecureRandom();
+		randomCustomer = randCustomer.nextInt(1,599);
+		shopper.setCustomer_id(randomCustomer);
+		shopperRepository.save(shopper);
+
 		return saved;
 	}
 	@DeleteMapping("/Delete_Shopper")
@@ -57,13 +66,13 @@ public class MicroServiceProjectApplication {
 		return deleted;
 	}
 	@PutMapping("/Update_Shopper")
-	public ResponseEntity<Shopper> Update_Shopper (@RequestParam int shopper_id, String first_name,  long credit_card, String expire_date, int cvc_code, int customer_id) {
+	public ResponseEntity<Shopper> Update_Shopper (@RequestParam int shopper_id, String first_name,  long credit_card, String expire_date, int cvc_code, Integer customer_id) {
 		Shopper update_Shopper = shopperRepository.findById(shopper_id).orElseThrow(() -> new ResourceNotFoundException("Employee not found for " + shopper_id));
 		update_Shopper.setFirst_name(first_name);
 
-		update_Shopper.setCredit_card(credit_card);
-		update_Shopper.setExpire_date(expire_date);
-		update_Shopper.setCvc_code(cvc_code);
+//		update_Shopper.setCredit_card(credit_card);
+//		update_Shopper.setExpire_date(expire_date);
+//		update_Shopper.setCvc_code(cvc_code);
 		update_Shopper.setCustomer_id(customer_id);
 		shopperRepository.save(update_Shopper);
 		return ResponseEntity.ok(update_Shopper);
@@ -77,8 +86,11 @@ public class MicroServiceProjectApplication {
 	}
 
 	@GetMapping("/Get_A_Customer")
-	public ResponseEntity<Customer>getACustomer(@RequestParam int customer_id){
-		Customer customer = customerRepository.findById(customer_id).orElseThrow(() -> new ResourceNotFoundException("Shopper does not exist with ID: " +customer_id));
+	public ResponseEntity<Customer>getACustomer(@RequestParam(required = false) int customer_id){
+		if (randomCustomer != 0){
+			customer_id = randomCustomer;}
+		System.out.println(customer_id);
+		Customer customer = customerRepository.findById(customer_id).orElseThrow(() -> new ResourceNotFoundException("Customer does not exist with ID: "));
 		return ResponseEntity.ok(customer);
 	}
 
