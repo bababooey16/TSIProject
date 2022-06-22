@@ -14,11 +14,13 @@ public class Customer {
     private String first_name;
     private String last_name;
     private String email;
+    private int address_id;
 
-    public Customer(String first_name, String last_name, String email){
+    public Customer(String first_name, String last_name, String email, int address_id){
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;
+        this.address_id = address_id;
     }
 
     public Customer(){
@@ -54,5 +56,13 @@ public class Customer {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public int getAddress_id() {
+        return address_id;
+    }
+
+    public void setAddress_id(int address_id) {
+        this.address_id = address_id;
     }
 }

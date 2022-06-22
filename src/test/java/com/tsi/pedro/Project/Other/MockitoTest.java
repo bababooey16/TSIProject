@@ -10,6 +10,8 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import static org.mockito.Mockito.when;
 import java.util.Optional;
 
@@ -25,13 +27,23 @@ public class MockitoTest {
     private ShopperRepository shopperRepository;
     @Mock
     private AddressRepository addressRepository;
+    @Mock
+    private FilmRepository filmRepository;
+    @Mock
+    private InventoryRepository inventoryRepository;
+    @Mock
+    private RentalRepository rentalRepository;
+    @Mock
+    private StaffRepository staffRepository;
+    @Mock
+    private StoreRepository storeRepository;
 
     int shopper_id;
     @BeforeEach
     void setUp(){
-        microServiceProjectApplication = new MicroServiceProjectApplication(shopperRepository, customerRepository, addressRepository);
+        microServiceProjectApplication = new MicroServiceProjectApplication(shopperRepository, customerRepository, addressRepository, filmRepository, inventoryRepository, rentalRepository, staffRepository, storeRepository);
     }
-
+    //SHOPPER TESTS
     @Test
     public void getAllShoppers(){
 
@@ -86,6 +98,7 @@ public class MockitoTest {
         Assertions.assertEquals(Expected,Actual,"Shopper was not updated.");
     }
 
+    //CUSTOMER TESTING
     @Test
     public void getAllCustomers(){
         microServiceProjectApplication.getAllCustomers();
@@ -93,7 +106,7 @@ public class MockitoTest {
     }
     @Test
     public void testGetACustomer(){
-        Customer testCustomer = new Customer ("testnameF", "TestnameL", "Exampleemail@pingpong.com");
+        Customer testCustomer = new Customer ("testnameF", "TestnameL", "Exampleemail@pingpong.com", 6);
         testCustomer.setCustomer_id(1);
         when(customerRepository.findById(1)).thenReturn(Optional.of(testCustomer));
         Customer Actual = microServiceProjectApplication.getACustomer(testCustomer.getCustomer_id()).getBody();
@@ -102,7 +115,7 @@ public class MockitoTest {
     }
 
 
-
+     //ADDRESS TESTING
     @Test
     public void getAllAddresses(){
         microServiceProjectApplication.getAllAddresses();
@@ -112,7 +125,7 @@ public class MockitoTest {
 
     @Test
     public void testGetAnAddress(){
-        Address testAddress = new Address ("testaddress", "testdistrict");
+        Address testAddress = new Address ("testaddress", "testdistrict", 457745676455476L);
         testAddress.setAddress_id(1);
         when(addressRepository.findById(1)).thenReturn(Optional.of(testAddress));
         Address Actual = microServiceProjectApplication.getAnAddress(testAddress.getAddress_id()).getBody();

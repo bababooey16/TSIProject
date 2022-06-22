@@ -1,7 +1,11 @@
 package com.tsi.pedro.Project.Selenium;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,44 +16,28 @@ import java.time.Duration;
 
 public class seleniumTest {
     public WebDriver driver;
+    public final String HOME_URL= "http://localhost:8000/";
 
     //Selenium tests for my webpage
-    @Test
-    public void chromeDriverTest() {
-        WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
-        driver.quit();
-    }
-    @Test
-    public void chromeSessionTest() {
-        WebDriverManager.chromedriver().setup();
-        ChromeOptions options = new ChromeOptions();
-        driver = new ChromeDriver(options);
-
-        driver.quit();
-    }
-
-    //test for connecting to localsite, and interacting with tictactoe web app
-    @Test
-    public void webSiteConnectionTest(){
+    @BeforeEach
+            public void setUp() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
-        driver.get("http://localhost:8000/index.html");
-        String title = driver.getTitle();
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
-        WebElement navitem = driver.findElement(By.xpath("(//*[@class='nav-link'])[2]"));
-        navitem.click();
-
-
-//        WebElement squarebutton = driver.findElement(By.className("square"));
-//        squarebutton.click();
-//        WebElement squarebutton3 = driver.findElement(By.xpath("(//*[@class='square'])[3]"));
-//        squarebutton3.click();
-//        WebElement historybutton = driver.findElement(By.xpath("(//*[@id='historybutton'])[2]"));
-//        historybutton.click();
     }
 
-
+    @ParameterizedTest
+    @CsvSource({
+            "home, index.html",
+            "buy, buy.html",
+            "about, about.html",
+    })
+    void testNav(String id, String expected){
+        driver.get("http://localhost:8000/index.html");
+        driver.findElement(By.id(id)).click();
+        String URL = driver.getCurrentUrl();
+        Assertions.assertEquals(URL, HOME_URL + expected, "Incorrect Page");
+        driver.quit();
+    }
 
 
 

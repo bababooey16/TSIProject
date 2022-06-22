@@ -30,9 +30,49 @@ public class ShopperTest {
         Assertions.assertEquals("replacedFName", testShopper.getFirst_name(), "first name not set.");
     }
 
+    @Test
+    public void testGetCredit_Card(){
+        Shopper testShopper = new Shopper("testFName", 12365465464654L,"05/05",306,69);
+        Assertions.assertEquals(12365465464654L, testShopper.getCredit_card(), "credit card not found.");
+    }
 
-
-
-
-
+    @Test
+    public void testSetCredit_Card(){
+        Shopper testShopper = new Shopper("testFName", 12876453645673L,"05/05",306,69);
+        testShopper.setCredit_card(6757467456487564857L);
+        Assertions.assertEquals(6757467456487564857L, testShopper.getCredit_card(), "card not set.");
+    }
+    @Test
+    public void testGetExpire_date(){
+        Shopper testShopper = new Shopper("testFName", 12365465464654L,"05/05",306,69);
+        Assertions.assertEquals("05/05", testShopper.getExpire_date(), "date not found.");
+    }
+    @Test
+    public void testSetExpire_Date(){
+        Shopper testShopper = new Shopper("testFName", 12876453645673L,"05/05",306,69);
+        testShopper.setExpire_date("06/06");
+        Assertions.assertEquals("06/06", testShopper.getExpire_date(), "date not set.");
+    }
+    @Test
+    public void testGetCvc_Code(){
+        Shopper testShopper = new Shopper("testFName", 12365465464654L,"05/05",306,69);
+        Assertions.assertEquals(306, testShopper.getCvc_code(), "code not found.");
+    }
+    @Test
+    public void testSetCvc_Code(){
+        Shopper testShopper = new Shopper("testFName", 12876453645673L,"05/05",306,69);
+        testShopper.setCvc_code(505);
+        Assertions.assertEquals(505, testShopper.getCvc_code(), "code not set.");
+    }
+    @Test
+    public void testGetCustomer_Id(){
+        Shopper testShopper = new Shopper("testFName", 12365465464654L,"05/05",306,69);
+        Assertions.assertEquals(69, testShopper.getCustomer_id(), "ID not found.");
+    }
+    @Test
+    public void testSetCustomer_Id(){
+        Shopper testShopper = new Shopper("testFName", 12876453645673L,"05/05",306,69);
+        testShopper.setCustomer_id(29);
+        Assertions.assertEquals(29, testShopper.getCustomer_id(), "ID not set.");
+    }
 }

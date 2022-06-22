@@ -1,4 +1,4 @@
-package com.tsi.pedro.Project.Other;
+package com.tsi.pedro.Project.Cucumber;
 
 import com.tsi.pedro.Project.*;
 import io.cucumber.java.en.Given;
@@ -23,19 +23,34 @@ public class findAnAddressByIdStepsDef {
     private ShopperRepository shopperRepository;
     @Mock
     private AddressRepository addressRepository;
+    @Mock
+    private FilmRepository filmRepository;
+    @Mock
+    private InventoryRepository inventoryRepository;
+    @Mock
+    private RentalRepository rentalRepository;
+    @Mock
+    private StaffRepository staffRepository;
+    @Mock
+    private StoreRepository storeRepository;
 
     @BeforeEach
     void setUp(){
         shopperRepository =mock(ShopperRepository.class);
         customerRepository=mock(CustomerRepository.class);
         addressRepository=mock(AddressRepository.class);
-        microServiceProjectApplication = new MicroServiceProjectApplication(shopperRepository, customerRepository, addressRepository);
+        filmRepository=mock(FilmRepository.class);
+        inventoryRepository=mock(InventoryRepository.class);
+        rentalRepository=mock(RentalRepository.class);
+        staffRepository=mock(StaffRepository.class);
+        storeRepository=mock(StoreRepository.class);
+        microServiceProjectApplication = new MicroServiceProjectApplication(shopperRepository, customerRepository, addressRepository, filmRepository, inventoryRepository, rentalRepository, staffRepository, storeRepository);
     }
 
     Address Actual;
     @Given("I have the address id number")
     public void i_have_the_address_id_number() {
-        findAddress = new Address("addresstest", "districttest");
+        findAddress = new Address("addresstest", "districttest", 756574684545768L);
         findAddress.setAddress_id(1);
     }
     @When("I input the address id into the search")

@@ -13,10 +13,11 @@ public class Address {
     int address_id;
     private String address;
     private String district;
-
-    public Address(String address, String district){
+    private Long phone;
+    public Address(String address, String district, Long phone){
         this.address = address;
         this.district = district;
+        this.phone = phone;
     }
 
     public Address(){
@@ -46,6 +47,11 @@ public class Address {
         this.district = district;
     }
 
+    public Long getPhone() {
+        return phone;
+    }
 
-
+    public void setPhone(Long phone) {
+        this.phone = phone;
+    }
 }
