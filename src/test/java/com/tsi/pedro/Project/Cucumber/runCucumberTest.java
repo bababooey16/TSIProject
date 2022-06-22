@@ -1,4 +1,4 @@
-package com.tsi.pedro.Project.Other;
+package com.tsi.pedro.Project.Cucumber;
 
 
 import io.cucumber.junit.Cucumber;

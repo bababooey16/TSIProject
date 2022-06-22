@@ -31,7 +31,6 @@ public class AddressTest {
     @Test
     public void testGetDistrict(){
         Address testAddress = new Address("testAddress", "testDistrict", 69696969696969L);
-        testAddress.getDistrict();
         Assertions.assertEquals("testDistrict", testAddress.getDistrict(), "district not found.");
     }
     @Test

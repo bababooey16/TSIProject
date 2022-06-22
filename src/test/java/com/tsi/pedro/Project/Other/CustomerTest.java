@@ -32,7 +32,6 @@ public class CustomerTest {
     @Test
     public void testGetLast_name(){
         Customer testCustomer = new Customer("testFName", "testLName", "example@email.com",6);
-        testCustomer.getLast_name();
         Assertions.assertEquals("testLName", testCustomer.getLast_name(), "last name not found.");
     }
     @Test
@@ -44,7 +43,6 @@ public class CustomerTest {
     @Test
     public void testGetEmail(){
         Customer testCustomer = new Customer("testFName", "testLName", "example@email.com",6);
-        testCustomer.getEmail();
         Assertions.assertEquals("example@email.com", testCustomer.getEmail(), "email not found.");
     }
     @Test
