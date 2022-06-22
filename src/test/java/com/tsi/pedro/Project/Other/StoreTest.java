@@ -10,7 +10,7 @@ public class StoreTest {
     public void testGetStore_id(){
         Store testStore = new Store(1,1);
         testStore.setStore_id(1);
-        Assertions.assertEquals(1,1);
+        Assertions.assertEquals(1,testStore.getStore_id(), "id not set.");
     }
     @Test
     public void testSetStore_id(){
