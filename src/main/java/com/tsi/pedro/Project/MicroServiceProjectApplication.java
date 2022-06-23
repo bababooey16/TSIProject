@@ -68,14 +68,12 @@ public class MicroServiceProjectApplication {
 		return ResponseEntity.ok(shopper);
 	}
 
-
 	@PostMapping("/Add_Shopper")
 	public @ResponseBody String Add_Shopper(@RequestBody Shopper shopper){
 		SecureRandom randCustomer = new SecureRandom();
 		randomCustomer = randCustomer.nextInt(1,599);
 		shopper.setCustomer_id(randomCustomer);
 		shopperRepository.save(shopper);
-
 
 		return saved;
 	}
@@ -88,10 +86,9 @@ public class MicroServiceProjectApplication {
 	public ResponseEntity<Shopper> Update_Shopper (@RequestParam int shopper_id, String first_name,  long credit_card, String expire_date, int cvc_code, Integer customer_id) {
 		Shopper update_Shopper = shopperRepository.findById(shopper_id).orElseThrow(() -> new ResourceNotFoundException("Shopper not found for " + shopper_id));
 		update_Shopper.setFirst_name(first_name);
-
-//		update_Shopper.setCredit_card(credit_card);
-//		update_Shopper.setExpire_date(expire_date);
-//		update_Shopper.setCvc_code(cvc_code);
+		update_Shopper.setCredit_card(credit_card);
+		update_Shopper.setExpire_date(expire_date);
+		update_Shopper.setCvc_code(cvc_code);
 		update_Shopper.setCustomer_id(customer_id);
 		shopperRepository.save(update_Shopper);
 		return ResponseEntity.ok(update_Shopper);
@@ -111,7 +108,9 @@ public class MicroServiceProjectApplication {
 
 		Customer customer = customerRepository.findById(customer_id).orElseThrow(() -> new ResourceNotFoundException("Customer does not exist with ID "));
 		customerAddressID = customer.getAddress_id();
+		randomCustomer = 0;
 		return ResponseEntity.ok(customer);
+
 
 	}
 
