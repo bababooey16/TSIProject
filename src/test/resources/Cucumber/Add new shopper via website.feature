@@ -6,3 +6,6 @@ Feature: Add a new shopper through webpage
     When  The buy page is open
     And The submit button is clicked
     Then Redirected to success page
+
+
+

@@ -1,6 +1,8 @@
 package com.tsi.pedro.Project.Cucumber;
 
 import com.sun.xml.bind.v2.TODO;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -14,6 +16,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
+import java.util.Map;
 
 public class addNewShopperViaWebsiteStepsDef {
     private WebDriver driver;
@@ -58,4 +62,10 @@ public class addNewShopperViaWebsiteStepsDef {
 
 
     }
+
+
+
+
+
+
 }

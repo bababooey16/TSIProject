@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -18,13 +19,14 @@ public class seleniumTest {
     public WebDriver driver;
     public final String HOME_URL= "http://localhost:8000/";
 
-    //Selenium tests for my webpage
+
     @BeforeEach
             public void setUp() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
     }
 
+    //parameterized testing
     @ParameterizedTest
     @CsvSource({
             "home, index.html",
@@ -39,7 +41,22 @@ public class seleniumTest {
         driver.quit();
     }
 
+    @Test
+    void testBuy(){
+        driver.get("http://localhost:8000/buy.html");
 
+        WebElement input2 = driver.findElement(By.id("input2"));
+        input2.sendKeys("5464546454645464");
+        WebElement input3 = driver.findElement(By.id("input3"));
+        input3.sendKeys("0505");
+        WebElement input4 = driver.findElement(By.id("input4"));
+        input4.sendKeys("505");
+
+        WebElement button = driver.findElement(By.id("submitbutton"));
+        button.click();
+        Assertions.assertTrue(Boolean.parseBoolean(input2.getAttribute("required")), "Input incorrect ");
+        driver.quit();
+    }
 
 
 

@@ -40,4 +40,15 @@ public class AddressTest {
         Assertions.assertEquals("replacedDistrict", testAddress.getDistrict(), "district not set.");
     }
 
+    @Test
+    public void testGetPhone(){
+        Address testAddress = new Address("testAddress", "testDistrict", 69696969696969L);
+        Assertions.assertEquals(69696969696969L, testAddress.getPhone(), "Number not found.");
+    }
+    @Test
+    public void testSetPhone(){
+        Address testAddress = new Address("testAddress", "testDistrict", 69696969696969L);
+        testAddress.setPhone(121212121212121212L);
+        Assertions.assertEquals(121212121212121212L, testAddress.getPhone(), "Number not set.");
+    }
 }
