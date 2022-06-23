@@ -33,30 +33,15 @@ public class seleniumTest {
             "buy, buy.html",
             "about, about.html",
     })
-    void testNav(String id, String expected){
+    void testNav(String id, String expectedurl){
         driver.get("http://localhost:8000/index.html");
         driver.findElement(By.id(id)).click();
         String URL = driver.getCurrentUrl();
-        Assertions.assertEquals(URL, HOME_URL + expected, "Incorrect Page");
+        Assertions.assertEquals(URL, HOME_URL + expectedurl, "Incorrect Page");
         driver.quit();
     }
 
-    @Test
-    void testBuy(){
-        driver.get("http://localhost:8000/buy.html");
 
-        WebElement input2 = driver.findElement(By.id("input2"));
-        input2.sendKeys("5464546454645464");
-        WebElement input3 = driver.findElement(By.id("input3"));
-        input3.sendKeys("0505");
-        WebElement input4 = driver.findElement(By.id("input4"));
-        input4.sendKeys("505");
-
-        WebElement button = driver.findElement(By.id("submitbutton"));
-        button.click();
-        Assertions.assertTrue(Boolean.parseBoolean(input2.getAttribute("required")), "Input incorrect ");
-        driver.quit();
-    }
 
 
 

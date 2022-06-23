@@ -126,6 +126,7 @@ public class MicroServiceProjectApplication {
 		if (customerAddressID != 0){
 		address_id = customerAddressID;}
 		Address address = addressRepository.findById(address_id).orElseThrow(() -> new ResourceNotFoundException("Address does not exist with ID"));
+		customerAddressID = 0;
 		return ResponseEntity.ok(address);
 	}
 
